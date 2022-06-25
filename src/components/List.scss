@@ -1,0 +1,73 @@
+.list{
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    form{
+        display: flex;
+        gap: 25px;
+
+        .options{
+            position: absolute;
+            margin-top: -40px;
+            display: flex;
+            flex-direction: column;
+            background-color: $WHITE;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            width: max-content;
+            gap: 15px;
+            display: none;
+            
+            button{
+                width: 110px;
+                height: 10px;
+                padding: 15px;
+                background-color: transparent;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover{
+                    background-color: rgba($GREY, .4);
+                }
+            }
+            
+            
+        }
+        .active{
+            display: block;
+        }
+        .select{
+                position: relative;
+                background-color: $WHITE;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 110px;
+                padding: 11px;
+                border-bottom: 1px solid $GREY;
+                margin-bottom: 20px;
+
+            }
+            
+            .rating-select{
+                
+                select{
+                    padding: $pm;
+                    border-bottom: 1px solid $GREY;
+                    
+                    
+                }
+            }
+    }
+    
+    .place-list{
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        flex: 1;
+        overflow: auto;
+    }
+}

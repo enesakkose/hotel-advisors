@@ -1,0 +1,42 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+    background-color: $BLUE;
+    color: $WHITE;
+
+    &-search{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        
+        &-bar{
+            display: flex;
+            gap: 8px;
+            padding: $ps $pm;
+            background-color: rgba($WHITE, .2);
+
+            &:hover{
+                background-color: rgba($WHITE, .3);
+            }
+
+            .search-icon{
+                display: flex;
+                align-items: center;
+            }
+
+            .search{
+                background-color: transparent;
+                border: none;
+                color: $WHITE;
+
+                &::placeholder{
+                    color: rgba($WHITE,  .4);
+                }
+            }
+        }
+
+
+    }
+}
