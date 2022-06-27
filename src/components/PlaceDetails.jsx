@@ -1,9 +1,14 @@
 import React from 'react'
 import { GrLocation } from 'react-icons/gr'
 import { BsTelephone } from 'react-icons/bs'
+import Rating from '@material-ui/lab/Rating'
 import './PlaceDetails.scss'
 
-function PlaceDetails({place}) {
+function PlaceDetails({place, selected, refProp}) {
+
+  if(selected) refProp?.current?.scrollIntoView({ behavior: 'smooth' , block: 'start'})
+    
+  
 
   return (
     <div className='place-details'>
@@ -11,6 +16,10 @@ function PlaceDetails({place}) {
           <img src={place.photo ? place.photo.images.large.url : 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHN8ZW58MHx8MHx8&w=250&q=80'} alt="" className="place-details-card-img" />
           <div className="place-details-card-text">
             <h3>{place.name}</h3>
+            <div className='place-details-card-text-rating flex'>
+              <Rating size='small' value={Number(place.rating)} readOnly/>
+              <h4>out of {place.num_reviews} reviews</h4>
+            </div>
             <div className='place-details-card-text-info flex'>
               <h4>Price</h4>
               <h4>{place.price_level}</h4>

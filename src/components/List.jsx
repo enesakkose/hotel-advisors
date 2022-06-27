@@ -1,19 +1,26 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState, useEffect, useRef, createRef} from 'react'
 import './List.scss'
 import { BiChevronDown } from 'react-icons/bi'
+import { CircularProgress } from '@material-ui/core'
 import PlaceDetails from './PlaceDetails'
  
-function List({places}) {
+function List({places, childClicked, isLoading}) {
 
   const [type, setType] = useState('restaurants')
   const [open ,setOpen] = useState(false)
+  const [elRefs, setElRefs] = useState([])
   const menuRef = useRef()
   const options = [
     { label: 'Restaruants', value: 'Restaurants'},
     { label: 'Hotels', value: 'Hotels'},
     { label: 'Entertain', value: 'Entertain'}
   ]
+  console.log(elRefs)
+  useEffect(() => {
+    const refs = Array(places?.length).fill().map((_, i) => elRefs[i] || createRef())
 
+    setElRefs(refs)
+  }, [places])
 
   const submit = (e) => {
     e.preventDefault()
@@ -41,6 +48,14 @@ function List({places}) {
   return (
     <div className='list'>
       <h2>Restaurants, Hotels & Entertainmants around you</h2>
+      {isLoading ? (
+        <div className="list-loading">
+          <CircularProgress />
+        </div>
+        
+      ): (
+        <>
+        
       <form onSubmit={submit} >
           <div className="select-place">
           <h4>Type</h4>
@@ -70,10 +85,16 @@ function List({places}) {
       <div className="place-list">
         {places?.map((place, i ) => (
           <div key={i} className="place">
-            <PlaceDetails place={place} />
+            <PlaceDetails
+             place={place} 
+             selected={Number(childClicked) === i}
+             refProp={elRefs[i]}
+             />
           </div>
         ))}
       </div>
+      </>
+      )}
     </div>
   )
 }

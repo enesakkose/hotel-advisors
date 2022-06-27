@@ -1,3 +1,30 @@
 .map{
     height: 90vh;
+
+    .on-map{
+          
+        &-card{
+            background: rgba($WHITE, .9);
+            width: max-content;
+            padding: $pl;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+
+            &:hover{
+                z-index: 100;
+            }
+            &-img{
+                width: 75px;
+                height: 75px;
+            }
+
+            h4{
+                max-width: 75px;
+            }
+        }
+    }
 }
