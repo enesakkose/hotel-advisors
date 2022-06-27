@@ -4,18 +4,18 @@ import { BiChevronDown } from 'react-icons/bi'
 import { CircularProgress } from '@material-ui/core'
 import PlaceDetails from './PlaceDetails'
  
-function List({places, childClicked, isLoading}) {
+function List({places, childClicked, isLoading, type, setType, rating, setRating}) {
 
-  const [type, setType] = useState('restaurants')
+
   const [open ,setOpen] = useState(false)
   const [elRefs, setElRefs] = useState([])
   const menuRef = useRef()
   const options = [
-    { label: 'Restaruants', value: 'Restaurants'},
-    { label: 'Hotels', value: 'Hotels'},
-    { label: 'Entertain', value: 'Entertain'}
+    { label: 'Restaruants', value: 'restaurants'},
+    { label: 'Hotels', value: 'hotels'},
+    { label: 'Attractions', value: 'attractions'}
   ]
-  console.log(elRefs)
+
   useEffect(() => {
     const refs = Array(places?.length).fill().map((_, i) => elRefs[i] || createRef())
 
@@ -73,7 +73,7 @@ function List({places, childClicked, isLoading}) {
 
           <div className="rating-select">
             <h4>Rating</h4>
-          <select className='rating-select'>
+          <select value={rating} onChange={(e) => setRating(e.target.value)} className='rating-select'>
             <option value={0}>All</option>
             <option value={3}>Above 3.0</option>
             <option value={4}>Above 4.0</option>

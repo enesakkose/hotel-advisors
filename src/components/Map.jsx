@@ -3,9 +3,9 @@ import GoogleMapReact from 'google-map-react'
 import { GrLocation } from 'react-icons/gr'
 import Rating from '@material-ui/lab/Rating'
 import './Map.scss'
-function Map({ setCoordinates, setBounds, places, setChildClicked }) {
+function Map({ setCoordinates, setBounds, places, setChildClicked, weatherData }) {
 
-
+console.log(weatherData)
 
   return (
 
@@ -37,6 +37,12 @@ function Map({ setCoordinates, setBounds, places, setChildClicked }) {
               <Rating size='small' value={Number(place.rating)} readOnly/>
             </div>
             
+          </div>
+        ))}
+
+        {weatherData?.list.map((data, i) => (
+          <div key={i} lat={data.coord.lat} lng={data.coord.lon}>
+            <img height={100} src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="" />
           </div>
         ))}
       </GoogleMapReact>

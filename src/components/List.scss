@@ -4,6 +4,13 @@
     flex-direction: column;
     gap: 15px;
 
+    &-loading{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+    }
+
     form{
         display: flex;
         gap: 25px;

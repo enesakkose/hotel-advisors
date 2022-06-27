@@ -2,18 +2,21 @@ import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Map from './components/Map'
 import List from './components/List'
-import { getPlacesData } from './api'
+import { getPlacesData, getWeatherData } from './api'
 
 
 
 function App() {
   
   const [places , setPlaces] = useState([])
+  const [filteredPlaces, setFilteredPlaces] = useState([])
   const [coordinates, setCoordinates] = useState({})
+  const [type, setType] = useState('restaurants')
   const [bounds, setBounds] = useState([])
   const [childClicked, setChildClicked] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  
+  const [rating, setRating] = useState('')
+  const [weatherData, setWeatherData] = useState([])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: {latitude, longitude}}) => {
@@ -21,22 +24,49 @@ function App() {
     })
   }, [])
   
+  useEffect(()=> {
+    const filteredPlaces = places.filter((place) => place.rating > rating)
+
+    setFilteredPlaces(filteredPlaces)
+  }, [rating])
 
   useEffect(()=> {
     setIsLoading(true)
-    getPlacesData(bounds.sw, bounds.ne)
+
+    getWeatherData(coordinates.lat, coordinates.lng)
+      .then((data)=> {
+        setWeatherData(data)
+      })
+
+    getPlacesData(type, bounds.sw, bounds.ne)
     .then((data) => {
       setPlaces(data)
+      setFilteredPlaces([])
       setIsLoading(false)
     })
-  }, [coordinates, bounds])
+  }, [type, coordinates, bounds])
 
   return (
     <div className="App">
-      <Header/>
+      <Header setCoordinates={setCoordinates}/>
       <div className="container">
-        <List places={places} childClicked={childClicked} isLoading={isLoading}/>
-        <Map coordinates={coordinates} setCoordinates={setCoordinates} setBounds={setBounds} places={places} setChildClicked={setChildClicked} />
+        <List 
+          places={filteredPlaces.length ? filteredPlaces : places} 
+          childClicked={childClicked} 
+          isLoading={isLoading} 
+          type={type} 
+          setType={setType}
+          rating={rating}
+          setRating={setRating}
+        />
+        <Map 
+          coordinates={coordinates} 
+          setCoordinates={setCoordinates} 
+          setBounds={setBounds} 
+          places={filteredPlaces ? filteredPlaces : places} 
+          setChildClicked={setChildClicked}
+          weatherData={weatherData}
+        />
       </div>
     </div>
   )
