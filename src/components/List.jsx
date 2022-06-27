@@ -3,7 +3,7 @@ import './List.scss'
 import { BiChevronDown } from 'react-icons/bi'
 import PlaceDetails from './PlaceDetails'
  
-function List() {
+function List({places}) {
 
   const [type, setType] = useState('restaurants')
   const [open ,setOpen] = useState(false)
@@ -14,28 +14,6 @@ function List() {
     { label: 'Entertain', value: 'Entertain'}
   ]
 
-  const places = [
-    { name: 'Cool Places'},
-    { name: 'Cool Placea'},
-    { name: 'Cool Placesss'},
-    { name: 'Cool Placesssss'},
-    { name: 'Cool Placew'},
-    { name: 'Cool Placee'},
-    { name: 'Cool Placeg'},
-    { name: 'Cool Placej'},
-    { name: 'Cool Placel'},
-    { name: 'Cool Placeş'},
-    { name: 'Cool Placek'},
-    { name: 'Cool Placej'},
-    { name: 'Cool Placel'},
-    { name: 'Cool Placeş'},
-    { name: 'Cool Placej'},
-    { name: 'Cool Placel'},
-    { name: 'Cool Placeş'},
-    { name: 'Cool Placej'},
-    { name: 'Cool Placel'},
-    { name: 'Cool Placeş'}
-  ]
 
   const submit = (e) => {
     e.preventDefault()
@@ -90,7 +68,7 @@ function List() {
       </form>
 
       <div className="place-list">
-        {places.map((place, i ) => (
+        {places?.map((place, i ) => (
           <div key={i} className="place">
             <PlaceDetails place={place} />
           </div>

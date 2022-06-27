@@ -10,20 +10,19 @@ function App() {
   
   const [places , setPlaces] = useState([])
   const [coordinates, setCoordinates] = useState({})
-  const [bounds, setBounds] = useState(null)
-
+  const [bounds, setBounds] = useState([])
+  console.log(places)
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords: {latitude, longitude}}) => {
       setCoordinates( {lat: latitude, lng: longitude})
     })
   }, [])
   
-  // you will bounce parametre to api
+
   useEffect(()=> {
     
-    getPlacesData()
+    getPlacesData(bounds.sw, bounds.ne)
     .then((data) => {
-      console.log(data)
       setPlaces(data)
     })
   }, [coordinates, bounds])
@@ -32,7 +31,7 @@ function App() {
     <div className="App">
       <Header/>
       <div className="container">
-        <List/>
+        <List places={places}/>
         <Map coordinates={coordinates} setCoordinates={setCoordinates} setBounds={setBounds} />
       </div>
     </div>

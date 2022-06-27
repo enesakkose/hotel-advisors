@@ -1,0 +1,48 @@
+.place-details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    .flex{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &-card{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        width: max-content;
+        border-radius: 10px;
+
+        &-img{
+            width: 440px;
+            height: 250px;  
+        }
+
+        &-text{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: $pl;
+
+            &-award{
+                margin-bottom: 10px;
+            }
+
+            &-actions{
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                
+                &-btn{
+                    background-color: transparent;
+                    cursor: pointer;
+                }
+            }
+
+
+        }
+        
+    }
+}

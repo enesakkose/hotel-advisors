@@ -4,9 +4,6 @@ const URL = 'https://travel-advisor.p.rapidapi.com/attractions/list-in-boundary'
 
 
 
-
-
-
 export const getPlacesData = async(sw, ne) => {
     
     try{
